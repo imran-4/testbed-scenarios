@@ -1,12 +1,7 @@
-#############################
-## UNDER DEVELOPMENT
-#############################
-
 FROM clearwater/base
 
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --force-yes clearwater-sip-stress nano tcpdump wget
 
-#clearwater-sip-stress-coreonly is recommended, which is used to stress test sprout. clearwater-sip-stress is used to stress test bono.
-
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --force-yes clearwater-sip-stress
+EXPOSE 5052 5054 5082
 
 WORKDIR "/usr/share/clearwater/bin"

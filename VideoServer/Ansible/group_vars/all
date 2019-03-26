@@ -1,0 +1,28 @@
+
+rtmp:
+  port: 1935
+  balancer_stats_port: 8080
+  backend_http_port: 8080
+  default_request_path: "/vod/example-big.flv"
+  client_log_dir: /opt/bitflow/client
+  client_log_dir_mounted: /bitflow/client
+  client_log_file: client.bin
+  client_api_port: 7777
+  client_data_port: 7778
+
+collector:
+  container_name: bitflow-collector
+  interval: 500ms
+  api_port: 7777
+  port: 5010
+  file_name: data.bin
+  data_path: /opt/bitflow/data-collector
+  data_path_mounted: /opt/bitflow/data-collector
+  extra_args: ""
+
+injector:
+  container_name: injector
+  hostname: "{{ inventory_hostname }}"
+  api_port: 7888
+  set_collector_tags: True
+

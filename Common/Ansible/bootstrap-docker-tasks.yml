@@ -1,0 +1,15 @@
+
+- name: Install pip
+  tags: [ bootstrap ]
+  raw: "type pip &> /dev/null && exit 77 || { apt update && apt install -y python-pip && exit 66; }"
+  args:
+    executable: /bin/bash
+  register: install_python_pip
+  changed_when: install_python_pip.rc == 66
+  failed_when: install_python_pip.rc != 77 and install_python_pip.rc != 66
+
+- name: Install docker-py
+  tags: [ bootstrap ]
+  pip:
+    name: docker-py
+    state: present
